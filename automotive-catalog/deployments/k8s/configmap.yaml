@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: automotive-catalog-config
+  namespace: automotive-catalog
+data:
+  ENV: production
+  PORT: "8080"
+  POSTGRES_MAX_OPEN_CONNS: "25"
+  POSTGRES_MAX_IDLE_CONNS: "10"
+  POSTGRES_CONN_MAX_LIFETIME: "5m"
+  REDIS_DB: "0"
+  REDIS_TTL: "15m"
+  KAFKA_PRODUCT_TOPIC: automotive.products
+  KAFKA_INVENTORY_TOPIC: automotive.inventory
+  KAFKA_FITMENT_TOPIC: automotive.fitments
+  KAFKA_CONSUMER_GROUP: catalog-service
+  AWS_REGION: us-east-1

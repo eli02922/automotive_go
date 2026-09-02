@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: catalog-worker
+  namespace: automotive-catalog
+  labels:
+    app: catalog-worker
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: catalog-worker
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 0
+  template:
+    metadata:
+      labels:
+        app: catalog-worker
+    spec:
+      terminationGracePeriodSeconds: 60
+      containers:
+        - name: worker
+          image: your-ecr-repo/automotive-catalog-worker:latest
+          imagePullPolicy: Always
+          envFrom:
+            - configMapRef:
+                name: automotive-catalog-config
+            - secretRef:
+                name: automotive-catalog-secrets
+          resources:
+            requests:
+              cpu: "500m"
+              memory: "512Mi"
+            limits:
+              cpu: "2000m"
+              memory: "1Gi"

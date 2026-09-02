@@ -1,0 +1,8 @@
+.env
+*.env.local
+/bin/
+/vendor/
+*.exe
+*.test
+*.out
+cover.html
